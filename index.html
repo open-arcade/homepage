@@ -5,162 +5,211 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Welcome to Open Arcade</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&display=swap">
 <style>
   :root {
-    --bg: #12141c;
-    --card: #1c1f2b;
-    --line: #2b3042;
-    --ink: #f2f3f7;
-    --muted: #9aa0b5;
-    --accent: #ff6b4a;
+    --bg: #0d1117;
+    --card: #161c26;
+    --line: #263041;
+    --ink: #eef2f8;
+    --muted: #8f9bb0;
+    --accent: #ffc533;
+    --cyan: #4fd6e8;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
     background: var(--bg);
     color: var(--ink);
-    font-family: "Outfit", "Segoe UI", Arial, sans-serif;
+    font-family: "Sora", "Segoe UI", Arial, sans-serif;
     line-height: 1.5;
   }
-  nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 16px 24px;
-    border-bottom: 1px solid var(--line);
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+  header.top { padding: 20px 0; }
+  .logo { font-weight: 800; font-size: 18px; letter-spacing: -0.01em; }
+  .logo span { color: var(--accent); }
+
+  .hero { text-align: center; padding: 56px 0 40px; }
+  h1 {
+    font-size: clamp(34px, 7vw, 64px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin: 0 0 14px;
   }
-  .logo { font-weight: 700; font-size: 20px; }
-  .logo b { color: var(--accent); }
+  h1 span {
+    background: linear-gradient(90deg, var(--accent), var(--cyan));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero p { color: var(--muted); font-size: 17px; margin: 0 auto 28px; max-width: 44ch; }
   #search {
     width: 100%;
-    max-width: 260px;
-    padding: 9px 14px;
+    max-width: 420px;
+    padding: 13px 20px;
     background: var(--card);
     border: 1px solid var(--line);
-    border-radius: 999px;
+    border-radius: 12px;
     color: var(--ink);
     font: inherit;
   }
-  #search:focus { outline: 2px solid var(--accent); }
-  .hero { max-width: 1000px; margin: 0 auto; padding: 64px 24px 24px; }
-  h1 {
-    font-size: clamp(34px, 7vw, 60px);
-    line-height: 1.1;
-    margin: 0 0 12px;
+  #search:focus { outline: 2px solid var(--accent); border-color: transparent; }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 16px;
   }
-  h1 b { color: var(--accent); }
-  .hero p { color: var(--muted); font-size: 18px; margin: 0; }
-  .games { max-width: 1000px; margin: 0 auto; padding: 24px; }
-  h2 { font-size: 20px; margin: 0 0 16px; }
+  h2 { font-size: 18px; margin: 0; }
+  #count { color: var(--muted); font-size: 14px; }
+
   .grid {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
   }
   .game {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 100%;
+    padding: 14px;
     background: var(--card);
     border: 1px solid var(--line);
     border-radius: 16px;
-    overflow: hidden;
     color: inherit;
     text-decoration: none;
     transition: transform .15s, border-color .15s;
   }
-  .game:hover, .game:focus-visible {
-    transform: translateY(-4px);
+  a.game:hover, a.game:focus-visible {
+    transform: translateY(-3px);
     border-color: var(--accent);
     outline: none;
   }
   .cover {
+    flex: none;
     display: grid;
     place-items: center;
-    height: 130px;
-    font-size: 52px;
-    font-weight: 700;
-    background: linear-gradient(135deg, #ff6b4a, #ffb347);
+    width: 84px;
+    height: 84px;
+    border-radius: 12px;
+    font-size: 34px;
+    font-weight: 800;
+    color: #10151d;
+    background: linear-gradient(135deg, #ffc533, #ff8a4c);
+    overflow: hidden;
   }
-  .grid li:nth-child(3n+2) .cover { background: linear-gradient(135deg, #5b7cff, #9a6bff); }
-  .grid li:nth-child(3n+3) .cover { background: linear-gradient(135deg, #1fb38a, #5fd6c4); }
   .cover img { width: 100%; height: 100%; object-fit: cover; }
-  .info { padding: 16px; }
-  .title { display: block; font-size: 18px; font-weight: 600; }
-  .desc { display: block; margin: 2px 0 14px; color: var(--muted); font-size: 14px; }
-  .play {
-    display: inline-block;
-    padding: 7px 18px;
-    background: var(--accent);
-    color: #1a0f0c;
-    border-radius: 999px;
-    font-weight: 700;
-    font-size: 14px;
+  .grid li:nth-child(4n+2) .cover { background: linear-gradient(135deg, #4fd6e8, #5b8cff); }
+  .grid li:nth-child(4n+3) .cover { background: linear-gradient(135deg, #7ee08a, #35b8a0); }
+  .grid li:nth-child(4n+4) .cover { background: linear-gradient(135deg, #ff7aa8, #b57bff); }
+  .title { display: block; font-size: 17px; font-weight: 600; }
+  .desc { display: block; margin: 2px 0 8px; color: var(--muted); font-size: 13px; }
+  .play { color: var(--accent); font-size: 14px; font-weight: 600; }
+
+  li.soon .game {
+    border-style: dashed;
+    background: transparent;
+    cursor: default;
   }
+  li.soon .cover { background: var(--line); color: var(--muted); }
+  li.soon .play { color: var(--muted); }
+
   #empty { display: none; color: var(--muted); }
-  footer { max-width: 1000px; margin: 24px auto 0; padding: 24px; color: var(--muted); font-size: 14px; }
+  footer { margin-top: 56px; padding: 28px 0 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
 </style>
 </head>
 <body>
-  <nav>
-    <div class="logo">Open<b>Arcade</b></div>
-    <input id="search" type="search" placeholder="Search games" aria-label="Search games">
-  </nav>
+  <div class="wrap">
+    <header class="top">
+      <div class="logo">Open<span>Arcade</span></div>
+    </header>
 
-  <header class="hero">
-    <h1>Welcome to <b>Open Arcade</b></h1>
-    <p>Pick a game and start playing. No downloads, no sign-up.</p>
-  </header>
+    <section class="hero">
+      <h1>Welcome to <span>Open Arcade</span></h1>
+      <p>Pick a game and start playing. No downloads, no sign-up.</p>
+      <input id="search" type="search" placeholder="Search games" aria-label="Search games">
+    </section>
 
-  <main class="games">
-    <h2>All games</h2>
-    <ul class="grid" id="grid">
-      <!-- To add a game, copy one <li> block and change the link, title and description.
-           Cover: use a letter or emoji, or swap it for <img src="images/name.png" alt="">.
-           For a game in your repo, the link is its folder, like games/snake/ -->
-      <li>
-        <a class="game" href="https://open-arcade.github.io/crossy.road/">
-          <div class="cover">C</div>
-          <div class="info">
-            <span class="title">Crossy Road</span>
-            <span class="desc">Cross the road without getting run over.</span>
-            <span class="play">Play</span>
+    <main>
+      <div class="section-head">
+        <h2>All games</h2>
+        <span id="count"></span>
+      </div>
+      <ul class="grid" id="grid">
+        <!-- To add a game, copy one <li> block and change the link, letter, title and description.
+             Cover: use a letter or emoji, or swap it for <img src="images/name.png" alt=""> -->
+        <li>
+          <a class="game" href="https://open-arcade.github.io/crossy.road/">
+            <div class="cover">C</div>
+            <div>
+              <span class="title">Crossy Road</span>
+              <span class="desc">Cross the road without getting run over.</span>
+              <span class="play">Play now</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="game" href="https://open-arcade.github.io/pokemon/">
+            <div class="cover">P</div>
+            <div>
+              <span class="title">Poké Path</span>
+              <span class="desc">Defend your base from waves of evil Pokemon.</span>
+              <span class="play">Play now</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="game" href="https://open-arcade.github.io/lane-rush/">
+            <div class="cover">L</div>
+            <div>
+              <span class="title">Lane Rush</span>
+              <span class="desc">Avoid oncoming traffic and upgrade your car.</span>
+              <span class="play">Play now</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="game" href="https://open-arcade.github.io/storm-rush/">
+            <div class="cover">S</div>
+            <div>
+              <span class="title">Storm Royale</span>
+              <span class="desc">Outlast the storm and be the last one standing.</span>
+              <span class="play">Play now</span>
+            </div>
+          </a>
+        </li>
+        <li class="soon">
+          <div class="game">
+            <div class="cover">?</div>
+            <div>
+              <span class="title">Coming soon!</span>
+              <span class="desc">A new game is on the way.</span>
+              <span class="play">Stay tuned</span>
+            </div>
           </div>
-        </a>
-      </li>
-      <li>
-        <a class="game" href="https://open-arcade.github.io/pokemon/">
-          <div class="cover">P</div>
-          <div class="info">
-            <span class="title">Poké Path</span>
-            <span class="desc">Defend your base from waves of evil Pokemon.</span>
-            <span class="play">Play</span>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="game" href="https://open-arcade.github.io/lane-rush/">
-          <div class="cover">L</div>
-          <div class="info">
-            <span class="title">Lane Rush</span>
-            <span class="desc">Avoid oncoming traffic and upgrade your car.</span>
-            <span class="play">Play</span>
-          </div>
-        </a>
-      </li>
-    </ul>
-    <p id="empty">No games match your search.</p>
-  </main>
+        </li>
+      </ul>
+      <p id="empty">No games match your search.</p>
+    </main>
 
-  <footer>For game suggestions and inquiries contact spam.github@proton.me</footer>
+    <footer>For game suggestions and inquiries contact spam.github@proton.me</footer>
+  </div>
 
   <script>
     var search = document.getElementById("search");
     var items = document.querySelectorAll("#grid li");
     var empty = document.getElementById("empty");
+    var count = document.getElementById("count");
+    function playable() {
+      return document.querySelectorAll("#grid li:not(.soon)").length;
+    }
+    count.textContent = playable() + " games";
     search.addEventListener("input", function () {
       var q = search.value.toLowerCase().trim();
       var shown = 0;
