@@ -44,7 +44,6 @@
   .logo {
     font-weight: 800;
     font-size: 18px;
-    letter-spacing: -0.01em;
   }
 
   .logo span {
@@ -89,6 +88,10 @@
     font: inherit;
   }
 
+  #search::placeholder {
+    color: var(--muted);
+  }
+
   #search:focus {
     outline: 2px solid var(--accent);
     border-color: transparent;
@@ -119,8 +122,8 @@
 
     display: grid;
 
-    /* 3 columns on wide screens */
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    /* 3 games per row on desktop */
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 
     gap: 16px;
   }
@@ -130,6 +133,7 @@
     align-items: center;
     gap: 16px;
 
+    min-height: 160px;
     height: 100%;
     padding: 14px;
 
@@ -140,9 +144,7 @@
     color: inherit;
     text-decoration: none;
 
-    transition:
-      transform 0.15s,
-      border-color 0.15s;
+    transition: transform 0.15s, border-color 0.15s;
   }
 
   a.game:hover,
@@ -153,7 +155,7 @@
   }
 
   .cover {
-    flex: none;
+    flex: 0 0 84px;
 
     display: grid;
     place-items: center;
@@ -168,11 +170,7 @@
 
     color: #10151d;
 
-    background: linear-gradient(
-      135deg,
-      #ffc533,
-      #ff8a4c
-    );
+    background: linear-gradient(135deg, #ffc533, #ff8a4c);
 
     overflow: hidden;
   }
@@ -183,28 +181,17 @@
     object-fit: cover;
   }
 
+  /* Cover colors */
   .grid li:nth-child(4n+2) .cover {
-    background: linear-gradient(
-      135deg,
-      #4fd6e8,
-      #5b8cff
-    );
+    background: linear-gradient(135deg, #4fd6e8, #5b8cff);
   }
 
   .grid li:nth-child(4n+3) .cover {
-    background: linear-gradient(
-      135deg,
-      #7ee08a,
-      #35b8a0
-    );
+    background: linear-gradient(135deg, #7ee08a, #35b8a0);
   }
 
   .grid li:nth-child(4n+4) .cover {
-    background: linear-gradient(
-      135deg,
-      #ff7aa8,
-      #b57bff
-    );
+    background: linear-gradient(135deg, #ff7aa8, #b57bff);
   }
 
   .title {
@@ -256,7 +243,14 @@
   }
 
   /* TABLET */
-  @media (max-width: 700px) {
+  @media (max-width: 850px) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  /* PHONE */
+  @media (max-width: 560px) {
     .wrap {
       padding: 0 16px;
     }
@@ -266,18 +260,11 @@
     }
 
     .grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  /* PHONE */
-  @media (max-width: 520px) {
-    .grid {
       grid-template-columns: 1fr;
     }
 
     .game {
-      min-height: 112px;
+      min-height: 130px;
     }
   }
 </style>
@@ -285,245 +272,236 @@
 
 <body>
 
-  <div class="wrap">
+<div class="wrap">
 
-    <header class="top">
-      <div class="logo">
-        Open<span>Arcade</span>
-      </div>
-    </header>
-
-    <section class="hero">
-
-      <h1>
-        Welcome to <span>Open Arcade</span>
-      </h1>
-
-      <p>
-        Pick a game and start playing. No downloads, no sign-up.
-      </p>
-
-      <input
-        id="search"
-        type="search"
-        placeholder="Search games"
-        aria-label="Search games"
-      >
-
-    </section>
-
-    <main>
-
-      <div class="section-head">
-        <h2>All games</h2>
-        <span id="count"></span>
-      </div>
-
-      <ul class="grid" id="grid">
-
-        <!-- CROSSY ROAD -->
-        <li>
-          <a
-            class="game"
-            href="https://open-arcade.github.io/crossy-road/"
-          >
-            <div class="cover">C</div>
-
-            <div>
-              <span class="title">
-                Crossy Road
-              </span>
-
-              <span class="desc">
-                Cross the road without getting run over.
-              </span>
-
-              <span class="play">
-                Play now
-              </span>
-            </div>
-          </a>
-        </li>
+  <header class="top">
+    <div class="logo">
+      Open<span>Arcade</span>
+    </div>
+  </header>
 
 
-        <!-- POKÉ PATH -->
-        <li>
-          <a
-            class="game"
-            href="https://open-arcade.github.io/pokemon/"
-          >
-            <div class="cover">P</div>
+  <section class="hero">
 
-            <div>
-              <span class="title">
-                Poké Path
-              </span>
+    <h1>
+      Welcome to <span>Open Arcade</span>
+    </h1>
 
-              <span class="desc">
-                Defend your base from waves of evil Pokemon.
-              </span>
+    <p>
+      Pick a game and start playing. No downloads, no sign-up.
+    </p>
 
-              <span class="play">
-                Play now
-              </span>
-            </div>
-          </a>
-        </li>
+    <input
+      id="search"
+      type="search"
+      placeholder="Search games"
+      aria-label="Search games"
+    >
+
+  </section>
 
 
-        <!-- LANE RUSH -->
-        <li>
-          <a
-            class="game"
-            href="https://open-arcade.github.io/lane-rush/"
-          >
-            <div class="cover">L</div>
+  <main>
 
-            <div>
-              <span class="title">
-                Lane Rush
-              </span>
-
-              <span class="desc">
-                Avoid oncoming traffic and upgrade your car.
-              </span>
-
-              <span class="play">
-                Play now
-              </span>
-            </div>
-          </a>
-        </li>
+    <div class="section-head">
+      <h2>All games</h2>
+      <span id="count"></span>
+    </div>
 
 
-        <!-- STORM ROYALE -->
-        <li>
-          <a
-            class="game"
-            href="https://open-arcade.github.io/storm-royale/"
-          >
-            <div class="cover">S</div>
+    <ul class="grid" id="grid">
 
-            <div>
-              <span class="title">
-                Storm Royale
-              </span>
+      <!-- GAME 1 -->
+      <li>
+        <a
+          class="game"
+          href="https://open-arcade.github.io/crossy-road/"
+        >
+          <div class="cover">C</div>
 
-              <span class="desc">
-                Outlast the storm and be the last one standing.
-              </span>
+          <div>
+            <span class="title">Crossy Road</span>
 
-              <span class="play">
-                Play now
-              </span>
-            </div>
-          </a>
-        </li>
+            <span class="desc">
+              Cross the road without getting run over.
+            </span>
 
-
-        <!-- PIN PLANET -->
-        <li>
-          <a
-            class="game"
-            href="https://open-arcade.github.io/pin-planet/"
-          >
-            <div class="cover">P</div>
-
-            <div>
-              <span class="title">
-                Pin Planet
-              </span>
-
-              <span class="desc">
-                The world's greatest wonders. Where will you drop the pin?
-              </span>
-
-              <span class="play">
-                Play now
-              </span>
-            </div>
-          </a>
-        </li>
-
-
-        <!-- COMING SOON -->
-        <li class="soon">
-          <div class="game">
-
-            <div class="cover">?</div>
-
-            <div>
-              <span class="title">
-                Coming soon!
-              </span>
-
-              <span class="desc">
-                A new game is on the way.
-              </span>
-
-              <span class="play">
-                Stay tuned
-              </span>
-            </div>
-
+            <span class="play">Play now</span>
           </div>
-        </li>
-
-      </ul>
-
-      <p id="empty">
-        No games match your search.
-      </p>
-
-    </main>
+        </a>
+      </li>
 
 
-    <footer>
-      For game suggestions and inquiries contact spam.github@proton.me
-    </footer>
+      <!-- GAME 2 -->
+      <li>
+        <a
+          class="game"
+          href="https://open-arcade.github.io/pokemon/"
+        >
+          <div class="cover">P</div>
 
-  </div>
+          <div>
+            <span class="title">Poké Path</span>
+
+            <span class="desc">
+              Defend your base from waves of evil Pokemon.
+            </span>
+
+            <span class="play">Play now</span>
+          </div>
+        </a>
+      </li>
 
 
-  <script>
-    var search = document.getElementById("search");
-    var items = document.querySelectorAll("#grid li");
-    var empty = document.getElementById("empty");
-    var count = document.getElementById("count");
+      <!-- GAME 3 -->
+      <li>
+        <a
+          class="game"
+          href="https://open-arcade.github.io/lane-rush/"
+        >
+          <div class="cover">L</div>
 
-    function playable() {
-      return document.querySelectorAll(
-        "#grid li:not(.soon)"
-      ).length;
-    }
+          <div>
+            <span class="title">Lane Rush</span>
 
-    count.textContent = playable() + " games";
+            <span class="desc">
+              Avoid oncoming traffic and upgrade your car.
+            </span>
 
-    search.addEventListener("input", function () {
+            <span class="play">Play now</span>
+          </div>
+        </a>
+      </li>
 
-      var q = search.value.toLowerCase().trim();
-      var shown = 0;
 
-      items.forEach(function (li) {
+      <!-- GAME 4 -->
+      <li>
+        <a
+          class="game"
+          href="https://open-arcade.github.io/storm-royale/"
+        >
+          <div class="cover">S</div>
 
-        var match =
-          li.textContent
-            .toLowerCase()
-            .indexOf(q) !== -1;
+          <div>
+            <span class="title">Storm Royale</span>
 
-        li.style.display = match ? "" : "none";
+            <span class="desc">
+              Outlast the storm and be the last one standing.
+            </span>
 
-        if (match) {
-          shown++;
-        }
+            <span class="play">Play now</span>
+          </div>
+        </a>
+      </li>
 
-      });
 
-      empty.style.display =
-        shown ? "none" : "block";
+      <!-- GAME 5 -->
+      <li>
+        <a
+          class="game"
+          href="https://open-arcade.github.io/pin-planet/"
+        >
+          <div class="cover">P</div>
+
+          <div>
+            <span class="title">Pin Planet</span>
+
+            <span class="desc">
+              The world's greatest wonders. Where will you drop the pin?
+            </span>
+
+            <span class="play">Play now</span>
+          </div>
+        </a>
+      </li>
+
+
+      <!-- COMING SOON -->
+      <li class="soon">
+
+        <div class="game">
+
+          <div class="cover">?</div>
+
+          <div>
+            <span class="title">Coming soon!</span>
+
+            <span class="desc">
+              A new game is on the way.
+            </span>
+
+            <span class="play">Stay tuned</span>
+          </div>
+
+        </div>
+
+      </li>
+
+    </ul>
+
+
+    <p id="empty">
+      No games match your search.
+    </p>
+
+  </main>
+
+
+  <footer>
+    For game suggestions and inquiries contact spam.github@proton.me
+  </footer>
+
+</div>
+
+
+<script>
+
+  var search = document.getElementById("search");
+  var items = document.querySelectorAll("#grid li");
+  var empty = document.getElementById("empty");
+  var count = document.getElementById("count");
+
+
+  function playable() {
+    return document.querySelectorAll(
+      "#grid li:not(.soon)"
+    ).length;
+  }
+
+
+  count.textContent = playable() + " games";
+
+
+  search.addEventListener("input", function () {
+
+    var q = search.value.toLowerCase().trim();
+    var shown = 0;
+
+
+    items.forEach(function (li) {
+
+      var match =
+        li.textContent
+          .toLowerCase()
+          .indexOf(q) !== -1;
+
+
+      li.style.display = match ? "" : "none";
+
+
+      if (match) {
+        shown++;
+      }
 
     });
-  </script>
+
+
+    empty.style.display =
+      shown ? "none" : "block";
+
+  });
+
+</script>
 
 </body>
 </html>
